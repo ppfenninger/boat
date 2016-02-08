@@ -26,8 +26,8 @@ max = realmax;
 xValue = xmin; 
 
 
-while d > bottomBoat
-    while xValue < xmax; 
+    while d > bottomBoat
+        while xValue < xmax; 
         fun = @(x) abs(x).^n - 1; %function for the hull of boat for given n
 
 
@@ -56,11 +56,11 @@ while d > bottomBoat
             waterLine = d;
             max = abs(volume - vWater);
         end
-        
-        xValue = xValue + stepX; 
+
+        d = d - stepI; 
     end
-    d = d - stepI; 
-end 
+    xValue = xValue + stepX; 
+end
 
 disp(waterLine); % y-intercept of the equation of the water line (tan(theta) is slope)
 

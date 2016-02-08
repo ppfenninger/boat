@@ -28,6 +28,7 @@ end
 %     
 % end
 
-
-
+function [xb, yb, zb] = cob(params)
+    
+end 
 
