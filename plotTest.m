@@ -1,0 +1,41 @@
+clf
+clear all 
+hold on
+width = 18; %cm
+length1 = 29; %cm
+depth = 12.5; %cm
+n = 1.5; 
+theta = linspace(0.12, pi, 50);
+comDepth = -6/100;
+com = [0, comDepth, 0];
+
+for i = 1:length(theta)
+    clf
+    hold on
+    theta(i);
+    percent = i/length(theta) * 100
+    %disp(percent); 
+    y = cob1DZero(theta(i), width, length1, depth, n); 
+    cobX(i) = y(1);
+    cobY(i) = y(2);
+    comX(i) = 0;
+    cob = [cobX(i)/100, cobY(i)/100, 0];
+%     plot(cobX(i), cobY(i), '*');
+    r = cob - com;
+    
+    volumeWater = y(3); 
+    magFWater = (volumeWater/1000)*9.8; 
+    slopeFWater = (-1/tan(theta(i))); 
+    angleFWater = atan(slopeFWater);  
+    fWater = [magFWater*cos(angleFWater), magFWater*sin(angleFWater), 0];
+    
+    moment = cross(r, fWater);
+    momentZ(i) = moment(3);
+    %magMoment(i) = sqrt(moment(1).^2 + moment(2).^2 + moment(3).^(2));
+    z(i) = 0; 
+    
+end 
+plot(theta.*180./pi, momentZ); 
+plot(theta.*180./pi, z)
+
+
