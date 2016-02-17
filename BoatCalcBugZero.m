@@ -2,12 +2,12 @@ function s = BoatCalcBugZero(theta, width, length1, depth, n)
     fun = @(x) depth*(abs(x/(width/2)).^n) - depth; %function for the hull of boat
 
     % vBoat = abs(length*integral(fun, width/-2, width/2)); %cm^3 %volume of boat
-    mBoat = 730+96+300; % g % mass of boat
+    mBoat = 386*2+96+300; % g % mass of boat
 
     densityWater = 1; % g/cm^3
     vWater = mBoat / densityWater; %cm^3 %volume water displaced by boat
 
-    dx = 0.01;
+    dx = 0.007;
     topBoat = 0; %cm %x axis
     bottomBoat = -1*depth; %cm 
 
@@ -37,9 +37,6 @@ function s = BoatCalcBugZero(theta, width, length1, depth, n)
                 volume = abs(length1*integral(fun2, x(1), x(2))); % between hull and line (entire volume)
             end
 
-            if volume < 0
-                %break code
-            end
 
             if abs(volume - vWater) < max1 
                 waterLine = d;
